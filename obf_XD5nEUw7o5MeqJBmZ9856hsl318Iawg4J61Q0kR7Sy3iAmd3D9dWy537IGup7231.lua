@@ -168,7 +168,7 @@ local function createButton(text, posX, color1, color2)
     grad.Rotation = 90
     grad.Parent = btn
 
-    -- Hover effect
+   
     btn.MouseEnter:Connect(function()
         TweenService:Create(btn, TweenInfo.new(0.15), {
             BackgroundTransparency = 0.15
@@ -183,7 +183,7 @@ local function createButton(text, posX, color1, color2)
     return btn
 end
 
--- CHECK KEY button (left)
+
 local CheckBtn = createButton(
     "✔  Check Key",
     UDim2.new(0.08, 0, 0, 172),
@@ -191,14 +191,14 @@ local CheckBtn = createButton(
     Color3.fromRGB(0, 60, 160)
 )
 
--- COPY LINK button (right)
+
 local CopyBtn = createButton(
     "🔗  Copy Link",
     UDim2.new(0, 0, 0, 172),
     Color3.fromRGB(80, 0, 180),
     Color3.fromRGB(40, 0, 120)
 )
--- Right-align it properly
+
 CopyBtn.Position = UDim2.new(1, -168 - 38, 0, 172)
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Size = UDim2.new(0, 28, 0, 28)
@@ -275,13 +275,13 @@ end)
 
 
 CopyBtn.MouseButton1Click:Connect(function()
-    -- Animate button press
+    
     TweenService:Create(CopyBtn, TweenInfo.new(0.08), { Size = UDim2.new(0, 162, 0, 40) }):Play()
     task.delay(0.08, function()
         TweenService:Create(CopyBtn, TweenInfo.new(0.08), { Size = UDim2.new(0, 168, 0, 44) }):Play()
     end)
 
-    setclipboard(KEY_LINK)  -- Copies link to clipboard (works in most executors)
+    setclipboard(KEY_LINK) 
 
     local oldText = CopyBtn.Text
     CopyBtn.Text = "✅  Copied!"
@@ -293,10 +293,6 @@ CopyBtn.MouseButton1Click:Connect(function()
     end)
 end)
 
--- ============================================
---         ENTRANCE ANIMATION
--- ============================================
-
 MainFrame.BackgroundTransparency = 1
 MainFrame.Position = UDim2.new(0.5, -240, 0.6, -130)
 
@@ -305,7 +301,7 @@ TweenService:Create(MainFrame, TweenInfo.new(0.45, Enum.EasingStyle.Back, Enum.E
     Position = UDim2.new(0.5, -240, 0.5, -130)
 }):Play()
 
--- Animate accent bar glow pulse
+
 task.spawn(function()
     while ScreenGui.Parent do
         TweenService:Create(MainStroke, TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
